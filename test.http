@@ -126,5 +126,41 @@ Content-Type: application/json
 
 ###
 
-Get {{sysdig_endpoint}}/api/teams
+# List all teams
+GET {{sysdig_endpoint}}/api/teams
 Authorization: Bearer {{sysdig_api_key}}
+
+
+###
+
+# Get a team
+GET {{sysdig_endpoint}}/api/teams/50429
+Authorization: Bearer {{sysdig_api_key}}
+
+###
+
+# Delete a team
+DELETE {{sysdig_endpoint}}/api/teams/50426
+Authorization: Bearer {{sysdig_api_key}}
+
+###
+
+# Create a team
+POST {{sysdig_endpoint}}/api/teams
+Authorization: Bearer {{sysdig_api_key}}
+Content-Type: application/json
+
+
+{
+    "name": "test2",
+    "description": "Test team description",
+    "show": "host",
+    "theme": "#7BB0B2",
+    "canUseSysdigCapture": true,
+    "canUseAgentCli": true,
+    "canUseCustomEvents": true,
+    "canUseAwsMetrics": false,
+    "canUseBeaconMetrics": false,
+    "canUseRapidResponse": false,
+    "users": []
+}
