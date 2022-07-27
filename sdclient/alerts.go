@@ -38,16 +38,16 @@ type AlertItem struct {
 
 type AlertsItem struct {
 	ID                        int                       `json:"id,omitempty"`
-	Condition                 string                    `json:"condition"`
+	Condition                 string                    `json:"condition,omitempty"`
 	CreatedOn                 int64                     `json:"createdOn,omitempty"`
 	CustomNotification        *CustomNotificationObject `json:"customNotification,omitempty"`
-	Description               string                    `json:"description"`
-	Enabled                   bool                      `json:"enabled"`
-	Filter                    string                    `json:"filter"`
+	Description               string                    `json:"description,omitempty"`
+	Enabled                   bool                      `json:"enabled,omitempty"`
+	Filter                    string                    `json:"filter,omitempty"`
 	ModifiedOn                int64                     `json:"modifiedOn,omitempty"`
 	Name                      string                    `json:"name,omitempty"`
 	NotificationChannels      []NotificationChannelItem `json:"notificationChannels,omitempty"`
-	NotificationChannelIds    []int                     `json:"notificationChannelIds"`
+	NotificationChannelIds    []int                     `json:"notificationChannelIds,omitempty"`
 	EventsCount               []interface{}             `json:"eventsCount,omitempty"`
 	NotificationCount         interface{}               `json:"notificationCount,omitempty"`
 	ReNotify                  bool                      `json:"reNotify,omitempty"`
