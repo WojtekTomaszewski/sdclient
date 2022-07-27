@@ -1,9 +1,10 @@
 package sdclient
 
 const (
-	URI_CHANNELS = "/api/notificationChannels"
-	URI_TEAMS    = "/api/teams"
-	URI_ALERTS   = "/api/v2/alerts"
+	URI_CHANNELS  = "/api/notificationChannels"
+	URI_TEAMS     = "/api/teams"
+	URI_ALERTS    = "/api/alerts"
+	URI_ALERTS_V2 = "/api/v2/alerts"
 
 	ALERT_SERVERITY_LOW    = "low"
 	ALERT_SERVERITY_MEDIUM = "medium"
