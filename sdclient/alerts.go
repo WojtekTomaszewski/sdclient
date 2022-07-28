@@ -125,11 +125,11 @@ func (c *Client) GetAlertWithContext(ctx context.Context, id int) (*Alert, error
 
 // CreateAlerts creates a new alerts from provided alerts object
 func (c *Client) CreateAlerts(alerts *Alerts) (*Alerts, error) {
-	return c.CreateAlertsWithContex(context.Background(), alerts)
+	return c.CreateAlertsWithContext(context.Background(), alerts)
 }
 
 // CreateAlertsWithContext creates a new alerts from provided alerts object
-func (c *Client) CreateAlertsWithContex(ctx context.Context, alerts *Alerts) (*Alerts, error) {
+func (c *Client) CreateAlertsWithContext(ctx context.Context, alerts *Alerts) (*Alerts, error) {
 
 	fullURL := fmt.Sprintf("%s%s", c.Endpoint, URI_ALERTS_V2)
 
@@ -154,13 +154,44 @@ func (c *Client) CreateAlertsWithContex(ctx context.Context, alerts *Alerts) (*A
 	return res, nil
 }
 
-// CreateAlert creates a new alert from provided alert object
-func (c *Client) CreateAlert(alert *Alert) (*Alert, error) {
-	return c.CreateAlertWithContex(context.Background(), alert)
+// UpdateAlerts updates an alerts from provided alerts object
+func (c *Client) UpdateAlerts(alerts *Alerts) (*Alerts, error) {
+	return c.UpdateAlertsWithContext(context.Background(), alerts)
 }
 
-// CreateAlertsWithContext creates a new alerts from provided alerts object
-func (c *Client) CreateAlertWithContex(ctx context.Context, alert *Alert) (*Alert, error) {
+// UpdateAlertsWithContext creates a new alerts from provided alerts object
+func (c *Client) UpdateAlertsWithContext(ctx context.Context, alerts *Alerts) (*Alerts, error) {
+
+	fullURL := fmt.Sprintf("%s%s", c.Endpoint, URI_ALERTS_V2)
+
+	byteBody, err := json.MarshalIndent(alerts, "", "  ")
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequestWithContext(ctx, http.MethodPut, fullURL, bytes.NewReader(byteBody))
+	if err != nil {
+		return nil, err
+	}
+
+	req.Header.Set("Content-Type", "application/json")
+
+	var res = new(Alerts)
+
+	if err := c.sendRequest(req, res); err != nil {
+		return nil, err
+	}
+
+	return res, nil
+}
+
+// CreateAlert creates a new alert from provided alert object
+func (c *Client) CreateAlert(alert *Alert) (*Alert, error) {
+	return c.CreateAlertWithContext(context.Background(), alert)
+}
+
+// CreateAlertWithContext creates a new alerts from provided alerts object
+func (c *Client) CreateAlertWithContext(ctx context.Context, alert *Alert) (*Alert, error) {
 
 	fullURL := fmt.Sprintf("%s%s", c.Endpoint, URI_ALERTS)
 
@@ -170,6 +201,37 @@ func (c *Client) CreateAlertWithContex(ctx context.Context, alert *Alert) (*Aler
 	}
 
 	req, err := http.NewRequestWithContext(ctx, http.MethodPost, fullURL, bytes.NewReader(byteBody))
+	if err != nil {
+		return nil, err
+	}
+
+	req.Header.Set("Content-Type", "application/json")
+
+	var res = new(Alert)
+
+	if err := c.sendRequest(req, res); err != nil {
+		return nil, err
+	}
+
+	return res, nil
+}
+
+// UpdateAlert updates an alert
+func (c *Client) UpdateAlert(alert *Alert) (*Alert, error) {
+	return c.UpdateAlertWithContext(context.Background(), alert)
+}
+
+// UpdateAlertWithContext updates an alert
+func (c *Client) UpdateAlertWithContext(ctx context.Context, alert *Alert) (*Alert, error) {
+
+	fullURL := fmt.Sprintf("%s%s", c.Endpoint, URI_ALERTS)
+
+	byteBody, err := json.MarshalIndent(alert, "", "  ")
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequestWithContext(ctx, http.MethodPut, fullURL, bytes.NewReader(byteBody))
 	if err != nil {
 		return nil, err
 	}
