@@ -13,7 +13,7 @@ type Alert struct {
 }
 
 type Alerts struct {
-	Alerts []AlertItem `json:"alerts,omitempty"`
+	Alerts []*AlertItem `json:"alerts,omitempty"`
 }
 
 type AlertItem struct {
@@ -154,37 +154,6 @@ func (c *Client) CreateAlertsWithContext(ctx context.Context, alerts *Alerts) (*
 	return res, nil
 }
 
-// UpdateAlerts updates an alerts from provided alerts object
-func (c *Client) UpdateAlerts(alerts *Alerts) (*Alerts, error) {
-	return c.UpdateAlertsWithContext(context.Background(), alerts)
-}
-
-// UpdateAlertsWithContext creates a new alerts from provided alerts object
-func (c *Client) UpdateAlertsWithContext(ctx context.Context, alerts *Alerts) (*Alerts, error) {
-
-	fullURL := fmt.Sprintf("%s%s", c.Endpoint, URI_ALERTS_V2)
-
-	byteBody, err := json.MarshalIndent(alerts, "", "  ")
-	if err != nil {
-		return nil, err
-	}
-
-	req, err := http.NewRequestWithContext(ctx, http.MethodPut, fullURL, bytes.NewReader(byteBody))
-	if err != nil {
-		return nil, err
-	}
-
-	req.Header.Set("Content-Type", "application/json")
-
-	var res = new(Alerts)
-
-	if err := c.sendRequest(req, res); err != nil {
-		return nil, err
-	}
-
-	return res, nil
-}
-
 // CreateAlert creates a new alert from provided alert object
 func (c *Client) CreateAlert(alert *Alert) (*Alert, error) {
 	return c.CreateAlertWithContext(context.Background(), alert)
@@ -224,7 +193,7 @@ func (c *Client) UpdateAlert(alert *Alert) (*Alert, error) {
 // UpdateAlertWithContext updates an alert
 func (c *Client) UpdateAlertWithContext(ctx context.Context, alert *Alert) (*Alert, error) {
 
-	fullURL := fmt.Sprintf("%s%s", c.Endpoint, URI_ALERTS)
+	fullURL := fmt.Sprintf("%s%s/%d", c.Endpoint, URI_ALERTS, alert.Alert.ID)
 
 	byteBody, err := json.MarshalIndent(alert, "", "  ")
 	if err != nil {
@@ -245,4 +214,26 @@ func (c *Client) UpdateAlertWithContext(ctx context.Context, alert *Alert) (*Ale
 	}
 
 	return res, nil
+}
+
+// DeleteAlert deletes an alert
+func (c *Client) DeleteAlert(id int) error {
+	return c.DeleteAlertWithContext(context.Background(), id)
+}
+
+// DeleteAlertWithContext deletes an alert
+func (c *Client) DeleteAlertWithContext(ctx context.Context, id int) error {
+
+	fullURL := fmt.Sprintf("%s%s/%d", c.Endpoint, URI_ALERTS, id)
+
+	req, err := http.NewRequestWithContext(ctx, http.MethodDelete, fullURL, nil)
+	if err != nil {
+		return err
+	}
+
+	if err := c.sendRequest(req, nil); err != nil {
+		return err
+	}
+
+	return nil
 }
