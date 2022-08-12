@@ -105,12 +105,12 @@ func (c *Client) GetNotificationChannelWithContext(ctx context.Context, id int) 
 	return res, nil
 }
 
-// CreateEmailNotificationChannel creates an notification channel
+// CreateNotificationChannel creates an notification channel
 func (c *Client) CreateNotificationChannel(channel *NotificationChannel) (*NotificationChannel, error) {
 	return c.CreateNotificationChannelWithContext(context.Background(), channel)
 }
 
-// CreateEmailNotificationChannelWithContext creates an notification channel
+// CreateNotificationChannelWithContext creates an notification channel
 func (c *Client) CreateNotificationChannelWithContext(ctx context.Context, channel *NotificationChannel) (*NotificationChannel, error) {
 
 	fullURL := fmt.Sprintf("%s%s", c.Endpoint, URI_CHANNELS)
@@ -141,7 +141,7 @@ func (c *Client) DeleteNotificationChannel(id int) error {
 	return c.DeleteNotificationChannelWithContext(context.Background(), id)
 }
 
-// DeleteNotificationChannel deletes an notification channel
+// DeleteNotificationChannelWithContext deletes an notification channel
 func (c *Client) DeleteNotificationChannelWithContext(ctx context.Context, id int) error {
 
 	fullURL := fmt.Sprintf("%s%s/%d", c.Endpoint, URI_CHANNELS, id)
