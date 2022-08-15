@@ -8,8 +8,6 @@ import (
 	"net/http"
 )
 
-type SilencingRules []SilencingRule
-
 type BulkDeleteRules struct {
 	SilencingRules RuleIdList `json:"silencingRules"`
 }
@@ -34,12 +32,12 @@ type SilencingRule struct {
 }
 
 // ListSilencingRules returns a list of silencing rules.
-func (c *Client) ListSilencingRules() (*SilencingRules, error) {
+func (c *Client) ListSilencingRules() ([]SilencingRule, error) {
 	return c.ListSilencingRulesWithContext(context.Background())
 }
 
 // ListSilencingRulesWithContext returns a list of silencing rules.
-func (c *Client) ListSilencingRulesWithContext(ctx context.Context) (*SilencingRules, error) {
+func (c *Client) ListSilencingRulesWithContext(ctx context.Context) ([]SilencingRule, error) {
 
 	fullURL := fmt.Sprintf("%s%s", c.Endpoint, URI_SILENCERULES)
 
@@ -48,7 +46,7 @@ func (c *Client) ListSilencingRulesWithContext(ctx context.Context) (*SilencingR
 		return nil, err
 	}
 
-	var res = new(SilencingRules)
+	var res = make([]SilencingRule, 0)
 
 	if err := c.sendRequest(req, res); err != nil {
 		return nil, err
