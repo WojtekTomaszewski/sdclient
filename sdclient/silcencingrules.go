@@ -48,7 +48,7 @@ func (c *Client) ListSilencingRulesWithContext(ctx context.Context) ([]Silencing
 
 	var res = make([]SilencingRule, 0)
 
-	if err := c.sendRequest(req, res); err != nil {
+	if err := c.sendRequest(req, &res); err != nil {
 		return nil, err
 	}
 
