@@ -26,7 +26,7 @@ type SilencingRule struct {
 	Name                   string `json:"name"`
 	Enabled                bool   `json:"enabled"`
 	StartTs                int64  `json:"startTs"`
-	DurationInSec          int    `json:"durationInSec"`
+	DurationInSec          int64  `json:"durationInSec"`
 	Scope                  string `json:"scope"`
 	NotificationChannelIds []int  `json:"notificationChannelIds,omitempty"`
 }
