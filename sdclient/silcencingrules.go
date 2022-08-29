@@ -110,8 +110,6 @@ func (c *Client) DeleteSilencingRules(ruleIds []int) error {
 func (c *Client) DeleteSilencingRulesWithContext(ctx context.Context, ruleIds []int) error {
 	fullURL := fmt.Sprintf("%s%s/delete", c.Endpoint, URI_SILENCERULES)
 
-	fmt.Println("ids", ruleIds)
-
 	dr := &BulkDeleteRules{
 		SilencingRules: RuleIdList{
 			Ids: ruleIds,
@@ -123,7 +121,7 @@ func (c *Client) DeleteSilencingRulesWithContext(ctx context.Context, ruleIds []
 		return err
 	}
 
-	fmt.Println(string(body))
+
 
 	req, err := http.NewRequestWithContext(ctx, http.MethodPost, fullURL, bytes.NewReader(body))
 	if err != nil {
