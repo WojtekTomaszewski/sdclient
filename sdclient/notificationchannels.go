@@ -18,6 +18,11 @@ type NotificationChannels struct {
 	NotificationChannels []NotificationChannelItem `json:"notificationChannels"`
 }
 
+// NotificationChannelOptions is interface for various possible notification channel type
+type NotificationChannelOptions interface {
+	String()
+}
+
 // NotificationChannelItem represents a single notification channel
 type NotificationChannelItem struct {
 	ID                   int              `json:"id,omitempty"`
@@ -40,6 +45,10 @@ type EmailNotificationChannelOptions struct {
 	EmailRecipients []string `json:"emailRecipients,omitempty"`
 }
 
+func (nc *EmailNotificationChannelOptions) Sring() string {
+	return fmt.Sprintf("email recipients: %v", nc.EmailRecipients)
+}
+
 // PagerDutyNotificationChannelOptions represents options for a PagerDuty notification channel
 type PagerDutyNotificationChannelOptions struct {
 	NotifyOnResolve bool   `json:"notifyOnResolve,omitempty"`
@@ -49,12 +58,20 @@ type PagerDutyNotificationChannelOptions struct {
 	ServiceName     string `json:"serviceName,omitempty"`
 }
 
+func (nc *PagerDutyNotificationChannelOptions) String() string {
+	return fmt.Sprintf("account: %s, service key: %s, service name: %s", nc.Account, nc.ServiceKey, nc.ServiceName)
+}
+
 // SlackNotificationChannelOptions represents options for a Slack notification channel
 type SlackNotificationChannelOptions struct {
 	NotifyOnResolve bool   `json:"notifyOnResolve,omitempty"`
 	NotifyOnOk      bool   `json:"notifyOnOk,omitempty"`
 	Channel         string `json:"channel,omitempty"`
 	URL             string `json:"url,omitempty"`
+}
+
+func (nc *SlackNotificationChannelOptions) String() string {
+	return fmt.Sprintf("channel: %s, url: %s", nc.Channel, nc.URL)
 }
 
 // ListNotificationChannels returns a list of all notification channels
