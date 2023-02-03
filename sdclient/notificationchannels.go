@@ -45,7 +45,7 @@ type EmailNotificationChannelOptions struct {
 	EmailRecipients []string `json:"emailRecipients,omitempty"`
 }
 
-func (nc *EmailNotificationChannelOptions) Sring() string {
+func (nc *EmailNotificationChannelOptions) String() string {
 	return fmt.Sprintf("email recipients: %v", nc.EmailRecipients)
 }
 
