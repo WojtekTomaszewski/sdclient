@@ -20,7 +20,7 @@ type NotificationChannels struct {
 
 // NotificationChannelOptions is interface for various possible notification channel type
 type NotificationChannelOptions interface {
-	String()
+	String() string
 }
 
 // NotificationChannelItem represents a single notification channel
