@@ -24,4 +24,5 @@ var Regions = map[string]string{
 	"jp-osa":   "https://jp-osa.monitoring.cloud.ibm.com",
 	"jp-tok":   "https://jp-tok.monitoring.cloud.ibm.com",
 	"br-sao":   "https://br-sao.monitoring.cloud.ibm.com",
+	"eu-es":    "https://eu-es.monitoring.cloud.ibm.com",
 }
