@@ -42,7 +42,6 @@ type NotificationChannelItem struct {
 type EmailNotificationChannelOptions struct {
 	NotifyOnResolve bool     `json:"notifyOnResolve,omitempty"`
 	NotifyOnOk      bool     `json:"notifyOnOk,omitempty"`
-	NotifyOnAck      bool     `json:"notifyOnAck,omitempty"`
 	EmailRecipients []string `json:"emailRecipients,omitempty"`
 }
 
