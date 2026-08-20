@@ -66,7 +66,7 @@ func (nc *PagerDutyNotificationChannelOptions) String() string {
 type SlackNotificationChannelOptions struct {
 	NotifyOnResolve *bool   `json:"notifyOnResolve,omitempty"`
 	NotifyOnOk      *bool   `json:"notifyOnOk,omitempty"`
-	NotifyOnAck      bool     `json:"notifyOnAck,omitempty"`
+	NotifyOnAck     *bool     `json:"notifyOnAck,omitempty"`
 	Channel         string `json:"channel,omitempty"`
 	URL             string `json:"url,omitempty"`
 }
