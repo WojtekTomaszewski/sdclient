@@ -40,8 +40,8 @@ type NotificationChannelItem struct {
 
 // EmailNotificationChannel represents options for an email notification channel
 type EmailNotificationChannelOptions struct {
-	NotifyOnResolve bool     `json:"notifyOnResolve,omitempty"`
-	NotifyOnOk      bool     `json:"notifyOnOk,omitempty"`
+	NotifyOnResolve *bool     `json:"notifyOnResolve,omitempty"`
+	NotifyOnOk      *bool     `json:"notifyOnOk,omitempty"`
 	EmailRecipients []string `json:"emailRecipients,omitempty"`
 }
 
@@ -51,8 +51,8 @@ func (nc *EmailNotificationChannelOptions) String() string {
 
 // PagerDutyNotificationChannelOptions represents options for a PagerDuty notification channel
 type PagerDutyNotificationChannelOptions struct {
-	NotifyOnResolve bool   `json:"notifyOnResolve,omitempty"`
-	NotifyOnOk      bool   `json:"notifyOnOk,omitempty"`
+	NotifyOnResolve *bool   `json:"notifyOnResolve,omitempty"`
+	NotifyOnOk      *bool   `json:"notifyOnOk,omitempty"`
 	Account         string `json:"account,omitempty"`
 	ServiceKey      string `json:"serviceKey,omitempty"`
 	ServiceName     string `json:"serviceName,omitempty"`
@@ -64,8 +64,8 @@ func (nc *PagerDutyNotificationChannelOptions) String() string {
 
 // SlackNotificationChannelOptions represents options for a Slack notification channel
 type SlackNotificationChannelOptions struct {
-	NotifyOnResolve bool   `json:"notifyOnResolve,omitempty"`
-	NotifyOnOk      bool   `json:"notifyOnOk,omitempty"`
+	NotifyOnResolve *bool   `json:"notifyOnResolve,omitempty"`
+	NotifyOnOk      *bool   `json:"notifyOnOk,omitempty"`
 	NotifyOnAck      bool     `json:"notifyOnAck,omitempty"`
 	Channel         string `json:"channel,omitempty"`
 	URL             string `json:"url,omitempty"`
